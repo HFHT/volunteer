@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './index.css';
+import ReactDOM from 'react-dom/client'
+// @ts-ignore
+// import { ClientJS } from 'clientjs'
+import { APIProvider } from '@vis.gl/react-google-maps';
+import { fetchAll, fetchConstituents, fetchLocations, fetchSAS, fetchSettings, uniqueBarCode } from './helpers';
+import { Error, Main } from './pages';
+import { PageLayout } from './components';
 
-function App() {
-  const [count, setCount] = useState(0)
+(async () => {
+  try {
+    const sas = await fetchSAS();
+    const id = uniqueBarCode()
+    // let clientJs: any
+    // clientJs = new (ClientJS)
+    // const clientInfo: any = {
+    //   fingerprint: clientJs.getFingerprint(),
+    //   client: clientJs.getBrowserData(),
+    //   language: navigator.language
+    // }
+    // const fetchTracking = {
+    //   url: `${import.meta.env.VITE_MONGO_URL}?req=${encodeURIComponent(JSON.stringify({ method: 'find', db: 'Truck', collection: 'DonorTracking', find: { _id: clientInfo.fingerprint } }))}`,
+    //   init: {
+    //     method: 'GET',
+    //     headers: new Headers
+    //   }
+    // }
+    const theData = await fetchAll([
+      fetchConstituents,
+      fetchLocations,
+      fetchSettings
+    ])
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    ReactDOM.createRoot(document.getElementById('root')!).render(
+      <APIProvider apiKey={`${import.meta.env.VITE_GOOGLE_APIKEY}`} libraries={['places']}>
+        <PageLayout>
+          {(sas && theData) ? <Main sas={sas} constituents={theData[0]} locations={theData[1]} settings={theData[2]} session={theData[3]} id={id} /> : <Error sas={sas} settings={theData[2]} />}
+        </PageLayout>
+      </APIProvider>
+    )
+  } catch (e) {
+    console.log('Initialization Error', e);
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+      <>
+        {<h3>&nbsp;Trouble connecting to the Habitat Volunteer System. You may be experiencing problems with your internet connection. Please try again later.</h3>}
+      </>,
+    );
 
-export default App
+  }
+
+})()
