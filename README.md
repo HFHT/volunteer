@@ -42,3 +42,6 @@ description
 members - array of constituent ids
 events - array of events
 donation - amount and array of items (title, quantity, value)
+
+
+Future, move authentication to beginning, save user and auth in cookie, use API to authenticate to keep pins hidden, move contituent authentication to a different MongoDB collection.

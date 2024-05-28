@@ -1,12 +1,22 @@
-export function SignIn({locations}:any) {
+import { useState } from "react"
+import PhoneInput from "react-phone-input-2";
+
+interface SignInI {
+    constituent: constituentT | null
+    locations: locationT[]
+    activities: string[]
+}
+
+export function SignIn({constituent, locations, activities}:SignInI) {
+    const [_formFields, set_FormFields] = useState()
     return (
         <>
             <div>
                 <div>
                     <div><h2>Record Time</h2></div>
                     <div>
-                        <button>Check In</button>
-                        <button>Check Out</button>
+                        <button type="button">Check In</button>
+                        <button type="button">Check Out</button>
                     </div>
                     <div>
                         <select title="locations">
