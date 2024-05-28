@@ -4,7 +4,7 @@ import { Authenticate, History, SignIn, SignUp } from ".."
 import { find_row } from "../../helpers"
 
 interface MainI {
-    sas: string
+    sas: any
     constituents: constituentT[]
     locations: locationT[]
     settings: any

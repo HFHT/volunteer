@@ -10,7 +10,7 @@ import { PageLayout } from './components';
 (async () => {
   try {
     const sas = await fetchSAS();
-    const id = uniqueBarCode()
+    // const id = uniqueBarCode()
     // let clientJs: any
     // clientJs = new (ClientJS)
     // const clientInfo: any = {
@@ -34,7 +34,7 @@ import { PageLayout } from './components';
     ReactDOM.createRoot(document.getElementById('root')!).render(
       <APIProvider apiKey={`${import.meta.env.VITE_GOOGLE_APIKEY}`} libraries={['places']}>
         <PageLayout>
-          {(sas && theData) ? <Main sas={sas} constituents={theData[0]} locations={theData[1]} settings={theData[2]} session={theData[3]} id={id} /> : <Error sas={sas} settings={theData[2]} />}
+          {(sas && theData) ? <Main sas={sas} constituents={theData[0]} locations={theData[1]} settings={theData[2]} /> : <Error sas={sas} settings={theData[2]} />}
         </PageLayout>
       </APIProvider>
     )
