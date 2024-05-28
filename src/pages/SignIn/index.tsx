@@ -9,23 +9,23 @@ export function SignIn({locations}:any) {
                         <button>Check Out</button>
                     </div>
                     <div>
-                        <select>
+                        <select title="locations">
                             <option>Home...</option>
                         </select>
                     </div>
                     <div>
-                        <select>
+                        <select title="events">
                             <option>Event...</option>
                         </select>
                     </div>
                     <div>
-                        <select>
+                        <select title="activities">
                             <option>Activity...</option>
                         </select>
                     </div>
                     <div>Hours</div>
-                    <div><input type='date' /></div>
-                    <div><input type='time' /></div>
+                    <div><input type='date'  title="date"/></div>
+                    <div><input type='time'  title="time"/></div>
                 </div>
                 <div>
                     <div><h2>Today's Activities</h2></div>
