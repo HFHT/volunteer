@@ -14,7 +14,8 @@ type constituentT = {
     place: placeT
     locs: locT[]
     activities: string[]
-    hours: hoursT
+    hoursLife: number
+    hoursYTD: number
     lastLogin: string
     logins: number
 }
@@ -30,6 +31,11 @@ type locT = {
     title: string
     lat: number
     lng: number
+}
+
+type constituentHoursT = {
+    _id: string
+    h: hoursT[]
 }
 
 type hoursT = {

@@ -30,3 +30,6 @@
 .thebtns .abtn {
     padding: 0 10px;
 }
+.offline {
+    color: red;
+}

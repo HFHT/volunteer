@@ -1,7 +1,7 @@
 # volunteer
 
 constituent - one record for each person
-id - string to hold unique id, let mongo generate it.
+_id - string to hold unique id, let mongo generate it.
 type - admin, volunteer, ???
 status - active, inactive, deceased, 
 pin - sign in pin
@@ -12,7 +12,11 @@ last login date
 logins - count of logins
 custom locations - array of locations (title, lat, lng) ids, only show these for that person.
 custom activities - array of custom activities
+
+constituent hours - one record for each person
+_id - string, same value as their constituent record.
 hours - array of {day, event, in, out, duraction (calculate), location id, mileage (calculate)}
+
 
 locations - one record for each location
 id - string to hold unique id, let mongo generate it.

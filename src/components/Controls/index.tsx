@@ -1,8 +1,10 @@
+import { BadgeIcons } from '../../helpers';
 import './controls.css';
 interface IControls {
     setMode: Function
+    online: boolean
 }
-export function Controls({ setMode }: IControls) {
+export function Controls({ setMode, online }: IControls) {
     return (
         <>
             <div className='controlgrid'>
@@ -28,6 +30,7 @@ export function Controls({ setMode }: IControls) {
                     <div className='abtn' onClick={() => setMode('signin')}>Record Time</div>
                     <div className='abtn' onClick={() => setMode('signup')}>Event Sign-up</div>
                     <div className='abtn' onClick={() => setMode('history')}>Your History</div>
+                    {!online && <div className='offline'>{BadgeIcons('Offline')}</div>}
 
                 </div>
             </div>
