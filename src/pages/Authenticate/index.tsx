@@ -8,9 +8,10 @@ interface AuthenticateI {
     setMode: Function
     phone: string
     setPhone: Function
+    toast: Function
 }
 
-export function Authenticate({ constituents, setConstituent, setMode, phone, setPhone }: AuthenticateI) {
+export function Authenticate({ constituents, setConstituent, setMode, phone, setPhone, toast }: AuthenticateI) {
     const [authPhone, setAuthPhone] = useState(phone)
     const [pin, setPin] = useState('')
     const [haveConstituent, setHaveConstituent] = useState<constituentT | undefined>(undefined)
@@ -20,7 +21,7 @@ export function Authenticate({ constituents, setConstituent, setMode, phone, set
             setPhone(p)
             let thisConstituent: constituentT | undefined = find_row('phone', p, constituents)
             if (!thisConstituent) {
-                alert('Phone number not authorized!')
+                toast('Phone number not authorized!')
             } else {
                 console.log('Authenticate', thisConstituent)
                 setHaveConstituent(thisConstituent)
@@ -32,7 +33,7 @@ export function Authenticate({ constituents, setConstituent, setMode, phone, set
     const handlePin = (p: string) => {
         if (!haveConstituent) return
         setPin(p)
-        console.log(p,haveConstituent)
+        console.log(p, haveConstituent)
         if (p === haveConstituent.pin) {
             setConstituent(haveConstituent)
             setMode('signin')
@@ -50,7 +51,7 @@ export function Authenticate({ constituents, setConstituent, setMode, phone, set
                         onChange={(p: any) => handlePhoneChange(p)}
                     />
                 </div>
-                {phone && <div><input type='number' value={pin} onChange={(e) => handlePin(e.target.value)} placeholder='...pin' title="pin" /></div>}
+                {haveConstituent && <div><input autoFocus type='number' value={pin} onChange={(e) => handlePin(e.target.value)} placeholder='...pin' title="pin" /></div>}
 
                 {/* <div onClick={() => { setMode('signin'); setConstituent(constituents[0]) }}>Sign In</div> */}
             </div>

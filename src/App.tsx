@@ -1,7 +1,5 @@
-import './index.css';
+import './App.css';
 import ReactDOM from 'react-dom/client'
-// @ts-ignore
-// import { ClientJS } from 'clientjs'
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { fetchAll, fetchConstituents, fetchLocations, fetchSAS, fetchSettings, uniqueBarCode } from './helpers';
 import { Error, Main } from './pages';
@@ -10,21 +8,7 @@ import { PageLayout } from './components';
 (async () => {
   try {
     const sas = await fetchSAS();
-    // const id = uniqueBarCode()
-    // let clientJs: any
-    // clientJs = new (ClientJS)
-    // const clientInfo: any = {
-    //   fingerprint: clientJs.getFingerprint(),
-    //   client: clientJs.getBrowserData(),
-    //   language: navigator.language
-    // }
-    // const fetchTracking = {
-    //   url: `${import.meta.env.VITE_MONGO_URL}?req=${encodeURIComponent(JSON.stringify({ method: 'find', db: 'Truck', collection: 'DonorTracking', find: { _id: clientInfo.fingerprint } }))}`,
-    //   init: {
-    //     method: 'GET',
-    //     headers: new Headers
-    //   }
-    // }
+
     const theData = await fetchAll([
       fetchConstituents,
       fetchLocations,

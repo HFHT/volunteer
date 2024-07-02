@@ -51,7 +51,7 @@ input::-webkit-outer-spin-button {
 
     --color-glyph: white;
     --color-glyph-bg: darkred;
-
+    --color-icon: rgb(168, 166, 166);
     --color-input-text: white;
     --color-input-placeholder: rgb(156 163 175);
     --color-input-bg: rgb(55 65 81);
@@ -96,6 +96,7 @@ input::-webkit-outer-spin-button {
 
     --color-glyph: white;
     --color-glyph-bg: darkred;
+    --color-icon: rgb(63, 62, 62);
 
     --color-input-text: black;
     --color-input-placeholder: rgb(156 163 175);
@@ -186,26 +187,39 @@ svg {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  align-items: center;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: linear;
   cursor: pointer;
-  transition: border-color 0.25s;
+  background-color: inherit;
+  display: inline-flex;
 }
 
 button:hover {
-  border-color: #646cff;
+  background-color: var(--color-btn-hover);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
+button[disabled] {
+  color: rgb(146, 145, 145);
+  background-color: rgb(99, 98, 98);
+}
+button[disabled]:hover {
+  background-color: rgb(99, 98, 98);
+}
 .text {
   font-size: 0.875rem;
   line-height: 1.25rem;

@@ -33,3 +33,11 @@
 .offline {
     color: red;
 }
+
+.iconmenu {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    flex-shrink: 0;
+    fill: var(--color-icon);
+}

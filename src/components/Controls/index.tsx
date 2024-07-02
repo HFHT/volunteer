@@ -27,9 +27,9 @@ export function Controls({ setMode, online }: IControls) {
                 </div>
                 <div className="thetitle"><h2>Volunteer</h2></div>
                 <div className="thebtns">
-                    <div className='abtn' onClick={() => setMode('signin')}>Record Time</div>
-                    <div className='abtn' onClick={() => setMode('signup')}>Event Sign-up</div>
-                    <div className='abtn' onClick={() => setMode('history')}>Your History</div>
+                    <div className='abtn' onClick={() => setMode('signin')}>Time</div>
+                    <div className='abtn' onClick={() => setMode('signup')}>Events</div>
+                    <div className='abtn' onClick={() => setMode('history')}>History</div>
                     {!online && <div className='offline'>{BadgeIcons('Offline')}</div>}
 
                 </div>

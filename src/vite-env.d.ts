@@ -4,6 +4,12 @@ interface IControls {
     blocks: IBlocks[]
 }
 
+interface IuseMongo {
+    connection: { url: string, collection: string, key: string }
+    setter: Function
+    noSave?: boolean
+}
+
 type constituentT = {
     _id: string
     type: 'vol' | 'admin'
@@ -31,6 +37,7 @@ type locT = {
     title: string
     lat: number
     lng: number
+    distance?: number
 }
 
 type constituentHoursT = {
@@ -41,7 +48,7 @@ type constituentHoursT = {
 type hoursT = {
     day: string
     dur: number
-    loc: string | number
+    loc: string
     miles: number
     act: string
     in: string
@@ -56,5 +63,5 @@ type locationT = {
     lng: number
     custom: boolean
     status: 'active' | 'inactive' | 'archived'
-
+    distance?: number
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { fetchDays, find_id } from '../helpers'
+import { find_id } from '../helpers'
 
 //
 //Receives a constituent, refetches so it is current, updates constituent and/or hours
@@ -12,7 +12,7 @@ export function useSaveConstituent(schedDate: string, update: Function, toast: a
         console.log('useSaveStop-doSaveStop', theStop)
         setHasError(false)
         setIsSaving(true)
-        let theDay: any[] | undefined = await fetchDays([schedDate])
+        let theDay: any[] | undefined = ['']
         if (theDay === undefined) {
             setHasError(true)
             setIsSaving(false)

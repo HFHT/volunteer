@@ -2,9 +2,9 @@
 // export * from './useEmail';
 // export * from './useInterval';
 // export * from './useImageUpload';
-// export * from './useText';
-// export * from './useRefresh';
+export * from './useLocation';
 export * from './useMongo';
 export * from './useOnline';
 export * from './useParams';
 export * from './useSaveConstituent';
+export * from './useVolunteerHours';
