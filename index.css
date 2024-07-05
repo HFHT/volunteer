@@ -147,6 +147,36 @@ textarea {
   margin-top: 8px;
 }
 
+input {
+  color: var(--color-input-text);
+  background-color: var(--color-input-bg);
+  border-color: var(--color-input-border);
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-top: 6px;
+
+}
+
+[type="date"] {
+  font-size: 1.2em;
+}
+
+[type="time"] {
+  font-size: 1.2em;
+}
+
+select {
+  font-size: 0.9em;
+  height: 2em;
+  margin: 6px 0;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: var(--color-border);
+}
+
 h1 {
   font-size: 1.7em;
   line-height: 1.1;
@@ -160,10 +190,11 @@ h2 {
 h3 {
   font-size: 1.17em;
   line-height: 1.1;
+  margin-bottom: 4px;
 }
 
 
-@media (max-width: 319px) {
+/* @media (max-width: 319px) {
   textarea {
     width: 19em;
   }
@@ -178,7 +209,7 @@ h3 {
   h3 {
     font-size: 1rem;
   }
-}
+} */
 
 
 img,
@@ -186,7 +217,8 @@ svg {
   vertical-align: middle;
 }
 
-button {
+button,
+.button {
   align-items: center;
   margin-right: 0.25rem;
   margin-bottom: 0.25rem;
@@ -203,12 +235,15 @@ button {
   display: inline-flex;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   background-color: var(--color-btn-hover);
 }
 
 button:focus,
-button:focus-visible {
+button:focus-visible,
+.button:focus,
+.button:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
@@ -217,9 +252,11 @@ button[disabled] {
   color: rgb(146, 145, 145);
   background-color: rgb(99, 98, 98);
 }
+
 button[disabled]:hover {
   background-color: rgb(99, 98, 98);
 }
+
 .text {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -252,4 +289,17 @@ button[disabled]:hover {
 
 .hidden {
   display: none !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+.space-between {
+  justify-content: space-between;
+
 }

@@ -1,1 +1,8 @@
+input.hours {
+    width: 3em;
+}
 
+input.slider {
+    width: 12em;
+    height: 2em;
+}

@@ -2,6 +2,7 @@ import { act, useEffect, useState } from "react"
 import { SpinnerModal } from "../../components"
 import { useLocation, useParams, useVolunteerHours } from "../../hooks"
 import { dateFormat, timeAdd, timeDiff, timeFormat } from "../../helpers"
+import { CirclePlus } from "../../icons/InfoIcon"
 
 interface SignInI {
     constituent: constituentT
@@ -81,22 +82,32 @@ export function SignIn({ constituent, locations, activities, toast }: SignInI) {
             <div>
                 <div>
                     <div><h2>Record Time</h2></div>
-                    <div>
+                    <div className='flex space-between'>
                         <button type="button" disabled={openRecord !== null} onClick={handleCheckIn}>Check In</button>
                         <button type="button" disabled={openRecord === null} onClick={handleCheckOut}>Check Out</button>
                         <button type="button" onClick={handleRefresh}>Refresh</button>
                     </div>
+                    <hr />
                     <Locations locations={closest ? closest.order : []} selected={[_formFields.location, (e: any) => set_FormFields({ ..._formFields, location: e })]} />
                     {/* <Events /> */}
                     <Activities activities={activities} chosen={constituent ? constituent.activities : []} selected={[_formFields.activity, (e: any) => set_FormFields({ ..._formFields, activity: e })]} />
-                    <div>Hours</div>
-                    <div><input type='date' value={_formFields.date} onChange={(e: any) => set_FormFields({ ..._formFields, date: e.target.value })} title="date" /></div>
-                    <div><input type='time' value={_formFields.time} onChange={(e: any) => set_FormFields({ ..._formFields, time: e.target.value })} title="time" /></div>
-                    <div><input type='range' min="0" max="24" step="0.25" value={_formFields.hours} onChange={(e: any) => set_FormFields({ ..._formFields, hours: e.target.value })} title="hours" /></div>
-                    <div><input type='number' value={_formFields.hours} onChange={(e: any) => set_FormFields({ ..._formFields, hours: e.target.value })} title="time" /></div>
+                    <div className='flex space-around'>
+                        <div><input type='date' value={_formFields.date} onChange={(e: any) => set_FormFields({ ..._formFields, date: e.target.value })} title="date" /></div>
+                        <div><input type='time' value={_formFields.time} onChange={(e: any) => set_FormFields({ ..._formFields, time: e.target.value })} title="time" /></div>
+                    </div>
+                    <hr />
+                    <h3>Hours</h3>
+
+                    <div className='flex space-around'>
+                        <div className='flex'>
+                            <div><input type='number' value={_formFields.hours} onChange={(e: any) => set_FormFields({ ..._formFields, hours: e.target.value })} title="time" className='hours' /></div>
+                            <div><input type='range' min="0" max="24" step="0.25" value={_formFields.hours} onChange={(e: any) => set_FormFields({ ..._formFields, hours: e.target.value })} title="hours" className='slider' /></div>
+                        </div>
+                    </div>
 
                 </div>
                 <div>
+                    <hr />
                     <div><h2>Today's Activities</h2></div>
                     {volunteerHours && volunteerHours.filter((h: hoursT) => (h.day === dateFormat(null))).map((d: hoursT, idx: number) => (
                         <TodayActivities activity={d} key={idx} />
@@ -115,14 +126,14 @@ function Locations({ locations, selected }: LocationI) {
         return `${loc.title} (${(loc.distance && loc.distance > 99) ? '--' : `${loc.distance} miles`})`
     }
     return (
-        <div>
+        <div className='flex space-between'>
             <select value={selected[0]} onChange={(e: any) => selected[1](e.target.value)} title="locations">
                 <option value=''>...Location</option>
                 {locations && locations.map((l: locT, li: number) => (
                     <option value={l.title} key={`l${li}`}>{optionTitle(l)}</option>
                 ))}
             </select>
-            <button type="button">Add</button>
+            <div className='button' onClick={()=>{alert('Add location coming soon.')}}><CirclePlus /></div>
         </div>
     )
 }
@@ -143,14 +154,14 @@ interface ActivitiesI {
 }
 function Activities({ activities, chosen, selected }: ActivitiesI) {
     return (
-        <div>
+        <div className='flex space-between'>
             <select value={selected[0]} onChange={(e: any) => selected[1](e.target.value)} title="activities">
                 <option>...Activity</option>
                 {chosen && chosen.map((p: string, pi: number) => (
                     <option key={`p${pi}`}>{p}</option>
                 ))}
             </select>
-            <button type="button">Add</button>
+            <div className='button' onClick={()=>{alert('Add activity coming soon.')}}><CirclePlus /></div>
         </div>
     )
 }
