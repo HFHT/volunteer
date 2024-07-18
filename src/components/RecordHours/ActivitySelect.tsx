@@ -4,12 +4,14 @@ import { IconCirclePlus } from "@tabler/icons-react"
 interface ActivitySelectInterface {
     activities: string[]
     selected: [string, Function]
+    disabled: boolean
 }
-export function ActivitySelect({ activities, selected }: ActivitySelectInterface) {
+export function ActivitySelect({ activities, selected, disabled }: ActivitySelectInterface) {
     return (
         <Grid >
             <Grid.Col span={11} >
                 <NativeSelect value={selected[0]}
+                    disabled={disabled}
                     onChange={(e: any) => selected[1](e.target.value)}
                     data={activities && activities.map((p: string, pi: number) => p)}
                 />

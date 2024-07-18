@@ -70,6 +70,7 @@ type constituentHoursT = {
 }
 
 type hoursT = {
+    _id: string
     day: string
     dur: number
     loc: string

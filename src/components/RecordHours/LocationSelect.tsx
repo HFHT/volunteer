@@ -4,21 +4,22 @@ import { IconCirclePlus } from "@tabler/icons-react"
 interface LocationSelectInterface {
     locations: locT[]
     selected: [string, Function]
+    disabled: boolean
 }
-export function LocationSelect({ locations, selected }: LocationSelectInterface) {
-    const optionTitle = (loc: locT) => {
-        return `${loc.title} (${(loc.distance && loc.distance > 99) ? '--' : `${loc.distance} miles`})`
-    }
+export function LocationSelect({ locations, selected, disabled }: LocationSelectInterface) {
     return (
         <Grid >
             <Grid.Col span={11} >
                 <NativeSelect value={selected[0]}
-                    onChange={(e: any) => selected[1](e.target.value)}
-                    data={locations && locations.map((l: locT) => optionTitle(l))}
-                />
+                    disabled={disabled}
+                    aria-label='Select Location'
+                    onChange={(e: any) => selected[1](e.target.value)}>
+                    {locations && locations.map((l: locT, idx: number) => (
+                        <option key={idx} value={l.title}>{`${l.title} (${(l.distance && l.distance > 99) ? '--' : `${l.distance} miles`})`}</option>
+                    ))}
+                </NativeSelect>
             </Grid.Col>
             <Grid.Col span={1}>
-
                 <div className='button' onClick={() => { alert('Add location coming soon.') }}><IconCirclePlus /></div>
             </Grid.Col>
         </Grid>

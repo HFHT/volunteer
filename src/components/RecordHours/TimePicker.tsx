@@ -16,6 +16,6 @@ export function TimePicker({ value, onChange }: TimePickerInterface) {
     );
 
     return (
-        <TimeInput value={value} onChange={(e: any) => onChange(e)} ref={ref} rightSection={pickerControl} />
+        <TimeInput value={value} onChange={(e: any) => onChange(e.target.value)} ref={ref} rightSection={pickerControl} />
     );
 }

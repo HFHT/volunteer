@@ -1,11 +1,11 @@
 import { getDistance } from "../gps"
 
 export function mergeSortLocations(constituentLocs: any, locations: any, coords: coordsT, inactive: boolean = false) {
-    console.log('mergeSortActivities', constituentLocs, locations, inactive)
+    console.log('mergeSortLocations', constituentLocs, locations, coords, JSON.stringify(coords), inactive)
     if (!constituentLocs || !coords) return locations
     let mergedLocs = constituentLocs.concat(locations)
     if (!inactive) {
-        console.log('mergeSortActivities-filter', constituentLocs, locations)
+        console.log('mergeSortLocations-filter', constituentLocs, locations)
         mergedLocs = mergedLocs.filter((loc: locationT) => (loc.status !== 'inactive'))
     }
     mergedLocs = mergedLocs.map((loc: locationT) => ({ ...loc, distance: getDistance(coords.loc, {lat: loc.lat, lng: loc.lng}) }))

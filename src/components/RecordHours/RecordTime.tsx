@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useOnline, useParams, useVolunteerHours } from "../../hooks";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
-import { dateFormat, timeAdd, timeDiff, timeFormat } from "../../helpers";
+import { dateFormat, timeAdd, timeDiff, timeFormat, uniqueBarCode } from "../../helpers";
 import { LocationSelect } from "./LocationSelect";
 import { ActivitySelect, TimePicker } from "..";
 import { DateInput } from "@mantine/dates";
@@ -29,6 +29,7 @@ export function RecordTime({ constituent, refreshActivities }: RecordTimeInterfa
     if (!hours) return
     if (formHasErrors(_formFields)) return
     let allHours = [...hours, {
+      _id: uniqueBarCode(),
       day: _formFields.date,
       act: _formFields.activity,
       loc: _formFields.location,
@@ -98,7 +99,12 @@ export function RecordTime({ constituent, refreshActivities }: RecordTimeInterfa
     if (!constituent || constituent.locations.length === 0) return
     set_FormFields({ ..._formFields, location: constituent.locations[0].title, activity: constituent.activities[0] })
   }, [constituent])
-
+  const timeToHours = (theTime: string) => {
+    set_FormFields({ ..._formFields, time: theTime, hours: openRecord ? timeDiff(openRecord.r.in, theTime) : _formFields.hours })
+  }
+  const hoursToTime = (theHours: number) => {
+    set_FormFields({ ..._formFields, hours: theHours, time: openRecord ? timeAdd(openRecord.r.in, theHours) : _formFields.time })
+  }
   return (
     <>
       <h2>Record Time</h2>
@@ -112,20 +118,22 @@ export function RecordTime({ constituent, refreshActivities }: RecordTimeInterfa
         <LoadingOverlay visible={isBusyV || !isOnline} />
         <Group justify="space-between" gap="xs" grow className="pad-below">
           <DateInput value={new Date(_formFields.date)} onChange={(e: any) => set_FormFields({ ..._formFields, date: e })} />
-          <TimePicker value={_formFields.time} onChange={(e: any) => set_FormFields({ ..._formFields, time: e })} />
+          <TimePicker value={_formFields.time} onChange={(e: any) => timeToHours(e)} />
         </Group>
-        <LocationSelect locations={constituent.locations} selected={[_formFields.location, (e: any) => set_FormFields({ ..._formFields, location: e })]} />
-        <ActivitySelect activities={constituent.activities} selected={[_formFields.activity, (e: any) => set_FormFields({ ..._formFields, activity: e })]} />
+        <LocationSelect locations={constituent.locations} selected={[_formFields.location, (e: any) => set_FormFields({ ..._formFields, location: e })]} disabled={openRecord !== null} />
+        <ActivitySelect activities={constituent.activities} selected={[_formFields.activity, (e: any) => set_FormFields({ ..._formFields, activity: e })]} disabled={openRecord !== null} />
         <h3>Hours</h3>
         <Grid grow>
           <Grid.Col span={1}>
             <NumberInput value={_formFields.hours} min={0} max={24} step={0.25}
-              onChange={(e: any) => set_FormFields({ ..._formFields, hours: e })}
+              disabled={openRecord === null}
+              onChange={(e: any) => hoursToTime(e)}
             />
           </Grid.Col>
           <Grid.Col span={6}>
             <Slider
-              onChange={(e: any) => set_FormFields({ ..._formFields, hours: e })}
+              onChange={(e: any) => hoursToTime(e)}
+              disabled={openRecord === null}
               defaultValue={0}
               value={_formFields.hours}
               min={0}

@@ -47,12 +47,12 @@ export function useVolunteerHours({ _id, connection, noSave = false }: IuseVolHo
     return [volunteerHours, openRecord, fetch, mutate, isBusy] as const
 
     function hasOpenRecord(theRecords: hoursT[]) {
-        console.log(theRecords, dateFormat(null))
+        console.log('hasOpenRecord', theRecords, dateFormat(null))
         let today = dateFormat(null)
         let result = theRecords.filter((h: hoursT) => (h.day === today) && (h.out === ''))
         if (result.length === 0) return null
-        let resultIdx = theRecords.findIndex((h: hoursT) => (h.day === today) && (h.in === result[0].in))
-        console.log(result, resultIdx)
+        let resultIdx = theRecords.findIndex((h: hoursT) => (h._id === result[0]._id))
+        console.log('hasOpenRecord', result, resultIdx)
         if (resultIdx > -1 && theRecords[resultIdx].out === '') {
             return { idx: resultIdx, r: theRecords[resultIdx] }
         }
