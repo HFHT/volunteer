@@ -9,11 +9,35 @@ interface IuseMongo {
     setter: Function
     noSave?: boolean
 }
-
+type propsT = {
+    constituents: constituentT[]
+    locations: locationT[]
+    settings: settingsT[]
+    coords: coordsT
+    sas: {
+        url: any
+        sasKey: any
+    } | null;
+}
+type settingsT = {
+    _id: string
+    a: string[]
+}
+type coordsT = {
+    loc: {
+        lat: number
+        lng: number
+    };
+    errMsg: {
+        color: string
+        title: string
+        message: string
+    } | undefined
+}
 type constituentT = {
     _id: string
     type: 'vol' | 'admin'
-    status: 'active' | 'inactive' | 'deceased' 
+    status: 'active' | 'inactive' | 'deceased'
     pin: string
     phone: string
     name: nameT

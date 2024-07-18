@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
-import { find_row } from "../../helpers";
+import { find_row } from "../helpers";
 
 interface AuthenticateI {
     constituents: constituentT[]

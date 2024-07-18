@@ -6,3 +6,12 @@ input.slider {
     width: 12em;
     height: 2em;
 }
+
+.pickphoneinput {
+    margin-left: unset;
+    width: 90%;
+    margin-top: 2px;
+  }
+  .pickphone {
+    margin-top: 0.8rem;
+  }
