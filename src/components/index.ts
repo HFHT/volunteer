@@ -6,3 +6,6 @@ export * from './RecordHours/LocationSelect';
 export * from './RecordHours/RecordTime';
 export * from './RecordHours/TimePicker';
 export * from './RecordHours/TodaysActivities';
+export * from './History/YearTabs';
+export * from './History/WeekAccordion';
+export * from './History/DayCard';

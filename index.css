@@ -293,3 +293,7 @@ button:focus-visible,
 .pad-below {
   padding-bottom: 10px;
 }
+
+.csvlink {
+  color: var(--color-icon);
+}

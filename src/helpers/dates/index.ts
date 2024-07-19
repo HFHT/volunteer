@@ -3,6 +3,7 @@ export * from './dateDiff'
 export * from './dateElements'
 export * from './dateFormat';
 export * from './dateNew'
+export * from './getWeek'
 export * from './timeAdd';
 export * from './timeDiff';
 export * from './timeFormat';

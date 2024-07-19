@@ -90,3 +90,14 @@ type locationT = {
     status: 'active' | 'inactive' | 'archived'
     distance?: number
 }
+
+type formatHistoryType = {
+    year: number
+    hours: number
+    weeks: formatHistoryWeeksType[] | []
+}
+type formatHistoryWeeksType = {
+    weekNo: number
+    hours: number
+    rcds: hoursT[] | []
+}
